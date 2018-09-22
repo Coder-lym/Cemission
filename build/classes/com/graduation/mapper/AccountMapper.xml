@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.graduation.mapper.AccountMapper">
+
+	<resultMap type="Accounts" id="accountsMap">
+		<id column="id" property="id"/>
+		<result column="username" property="userName"/>
+		<result column="password" property="passWord"/>
+		<result column="role" property="role"/>
+	</resultMap>
+
+	<!-- 检测用户名和密码是否有效 -->
+	<select id="checkAccount" parameterType="String" resultType="accounts">
+		select * from account
+		<where>
+			<if test="account != null">
+				and username = '${account}'
+			</if>
+			<if test="password != null">
+				and password = '${password}'
+			</if>
+		</where>
+	
+	</select>
+
+	<!-- 操作员注册 -->
+	<insert id="saveAccount" parameterType="accounts">
+		insert into account (username,password,role)
+		values(#{userName},#{passWord},#{role})
+	</insert>
+	
+	<!-- 操作员信息查询（全部） -->
+	<select id="findAccounts" resultMap="accountsMap">
+		select * from account
+	</select>
+	
+	<!-- 操作员信息查询（通过id查询） -->
+	<select id="findAccountById" parameterType="int" resultType="accounts">
+		select * from account where id = #{id}
+	</select>
+	
+	<!-- 操作员管理：信息查询（包括模糊查询） -->
+	<select id="findAccount" parameterType="String" resultMap="accountsMap">
+		select * from account
+		<where>
+			<if test="account != null">
+				and username like '%${account}%'
+			</if>
+			<if test="role != ''">
+				and role = #{role}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 操作员管理：信息修改 -->
+	<update id="updateAccount" parameterType="accounts">
+		update account set username = #{userName},
+			password = #{passWord},
+			role = #{role}
+			where id = #{id}
+	</update>
+	
+	<!-- 操作员管理：信息删除 -->
+	<delete id="deleteAccount" parameterType="int">
+		delete from account where id = #{id}
+	</delete>
+	
+	<!-- 密码设置：修改密码 -->
+	<update id="updatePwd" parameterType="accounts">
+		update account set password = #{passWord} where id = #{id}
+	</update>
+
+</mapper>
