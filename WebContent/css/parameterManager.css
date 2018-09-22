@@ -1,0 +1,23 @@
+#main{
+	width:1090px;
+	height:600px;
+}
+.parameter_list{
+	margin:10px 80px 0px 50px;
+}
+p{
+	color:#6F6767;
+	font-size: 18px;
+	margin-bottom:0px;
+}
+table{
+	border-color: #D8D5D5;
+}
+th{
+	color:#53616C;
+}
+td{
+	width:150px;
+	height:35px;
+	text-align: center;
+}

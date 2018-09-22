@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.graduation.mapper.DataMapper">
+
+	<resultMap type="quanshengdata" id="qsdataMap">
+		<id column="id" property="id"/>
+		<result column="year" property="year"/>
+		<result column="code" property="code"/>
+		<result column="county" property="county"/>
+		<result column="climatetype" property="climateType"/>
+		<result column="landArea" property="landArea"/>
+		<result column="average" property="average"/>
+		<result column="njrainfall" property="njrainfall"/>
+		<result column="njair" property="njair"/>
+		<result column="frostless" property="frostless"/>
+		<result column="njsunshine" property="njsunshine"/>
+		<result column="totallabor" property="totallabor"/>
+		<result column="labor" property="labor"/>
+		<result column="yxarea" property="yxarea"/>
+		<result column="lsarea" property="lsarea"/>
+		<result column="lstotal" property="lstotal"/>
+		<result column="xmarea" property="xmarea"/>
+		<result column="xmtotal" property="xmtotal"/>
+		<result column="ymarea" property="ymarea"/>
+		<result column="ymtotal" property="ymtotal"/>
+		<result column="mharea" property="mharea"/>
+		<result column="mhtotal" property="mhtotal"/>
+		<result column="ylarea" property="ylarea"/>
+		<result column="yltotal" property="yltotal"/>
+		<result column="dgarea" property="dgarea"/>
+		<result column="dgtotal" property="dgtotal"/>
+		<result column="dsarea" property="dsarea"/>
+		<result column="dstotal" property="dstotal"/>
+		<result column="pigcunl" property="pigcunl"/>
+		<result column="pigchul" property="pigchul"/>
+		<result column="pigtotal" property="pigtotal"/>
+		<result column="cattlecunl" property="cattlecunl"/>
+		<result column="cattlechul" property="cattlechul"/>
+		<result column="cattletotal" property="cattletotal"/>
+		<result column="sheepcunl" property="sheepcunl"/>
+		<result column="sheepchul" property="sheepchul"/>
+		<result column="sheeptotal" property="sheeptotal"/>
+		<result column="mymtotal" property="mymtotal"/>
+		<result column="symtotal" property="symtotal"/>
+		<result column="qeggs" property="qeggs"/>
+		<result column="ncyd" property="ncyd"/>
+		<result column="nchf" property="nchf"/>
+		<result column="nyjx" property="nyjx"/>
+		<result column="gdarea" property="gdarea"/>
+		<result column="nbzara" property="nbzara"/>
+	</resultMap>
+	
+	<!-- 查询所有数据 -->
+	<select id="findData" resultMap="qsdataMap">
+		select * from quanshengdata
+	</select>
+	
+	<!-- 录入数据 -->
+	<insert id="saveData" parameterType="QuanShengData">
+		insert into QuanShengData (year,code,county,climatetype,landArea,average,njrainfall,njair,frostless,njsunshine,
+			totallabor,labor,yxarea,lsarea,lstotal,xmarea,xmtotal,ymarea,ymtotal,mharea,mhtotal,ylarea,yltotal,
+			dgarea,dgtotal,dsarea,dstotal,pigcunl,cattlecunl,sheepcunl,cattlechul,pigchul,sheepchul,pigtotal,
+			cattletotal,sheeptotal,mymtotal,symtotal,qeggs,ncyd,nchf,nyjx,gdarea,nbzara)
+			values
+				(#{year},#{code},#{county},#{climateType},#{landArea},#{average},#{njrainfall},
+					#{njair},#{frostless},#{njsunshine},#{totallabor},#{labor},#{yxarea},#{lsarea},
+					#{lstotal},#{xmarea},#{xmtotal},#{ymarea},#{ymtotal},#{mharea},#{mhtotal},
+					#{ylarea},#{yltotal},#{dgarea},#{dgtotal},#{dsarea},#{dstotal},#{pigcunl},
+					#{cattlecunl},#{sheepcunl},#{cattlechul},#{pigchul},#{sheepchul},#{pigtotal},
+					#{cattletotal},#{sheeptotal},#{mymtotal},#{symtotal},#{qeggs},#{ncyd},#{nchf},
+					#{nyjx},#{gdarea},#{nbzara})
+	</insert>
+	
+</mapper>

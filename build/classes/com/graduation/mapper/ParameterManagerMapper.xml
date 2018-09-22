@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.graduation.mapper.ParameterManagerMapper">
+
+	<resultMap type="ParameterManager" id="parameterResultMap">
+		<id column="id" property="id"/>
+		<result column="parameter_name" property="parameterName"/>
+		<result column="parameter_type" property="parameterType"/>
+		<result column="cemission_coefficient" property="cemissionCoe"/>
+	</resultMap>
+
+	<!-- 参数查询 -->
+	<select id="selectParameter" resultMap="parameterResultMap">
+		select * from parameterManager
+	</select>
+	
+	<!-- 根据id查询 -->
+	<select id="findParameterById" parameterType="int" resultMap="parameterResultMap">
+		select * from parameterManager where id = #{id}
+	</select>
+	
+	<!-- 参数添加 -->
+	<insert id="saveParameter" parameterType="parameterManager">
+		insert into parameterManager (parameter_name,cemission_coefficient,parameter_type)
+		values(#{parameterName},
+			   #{cemissionCoe},
+			   #{parameterType})
+	</insert>
+	
+	<!-- 参数修改 -->
+	<update id="updateParameter" parameterType="parameterManager">
+		update parameterManager set parameter_name = #{parameterName},
+			cemission_coefficient = #{cemissionCoe},
+			parameter_type = #{parameterType}
+			where id = #{id}
+		
+	</update>
+	
+	<!-- 参数（碳排放系数）删除 -->
+	<delete id="deleteParameter" parameterType="int">
+		delete from parameterManager
+		<where>
+			<if test="id != null">
+				and id = #{id}
+			</if>
+		</where>
+	</delete>
+	
+	<!-- 参数查询（用于碳排放值计算） -->
+	<select id="findParmeterBycvalue" resultMap="parameterResultMap">
+		select parameter_name,cemission_coefficient from parameterManager
+	</select>
+
+</mapper>

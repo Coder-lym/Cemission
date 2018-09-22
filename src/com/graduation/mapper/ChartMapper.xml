@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.graduation.mapper.ChartMapper">
+	
+	<resultMap type="Cvalue" id="CvalueResultMap">
+		<id column="id" property="id"/>
+		<result column="code" property="code"/>
+		<result column="year" property="year"/>
+		<result column="cvalue" property="cValue"/>
+	</resultMap>
+	
+	<select id="findCvalue" parameterType="String" resultMap="CvalueResultMap">
+		select distinct cv.year,cv.cvalue,qs.county 
+			from cemission_value cv,QuanShengData qs
+			where cv.code = #{code} and cv.code = qs.code
+	</select>
+	
+	<select id="findCounty" resultMap="CvalueResultMap">
+		select distinct county,cv.code
+			from QuanShengData qs,cemission_value cv
+			where qs.code = cv.code
+	</select>
+
+</mapper>
